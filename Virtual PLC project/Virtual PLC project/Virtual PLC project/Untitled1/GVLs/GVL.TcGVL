@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+  <GVL Name="GVL" Id="{8d0e06c1-69c7-4dc4-8b0b-fcc98f66b25d}">
+    <Declaration><![CDATA[VAR_GLOBAL
+    bInDeventer : BOOL := FALSE;      // Reiziger is in Deventer
+    bKoffieGereed : BOOL := FALSE;    // Koffie is gehaald door koffietaak
+    sStatusTekst : STRING := '';      // Status voor visualisatie
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>
