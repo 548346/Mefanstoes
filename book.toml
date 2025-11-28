@@ -1,0 +1,8 @@
+[book]
+authors = ["548346"]
+language = "en"
+src = "src"
+title = "Flowchart"
+
+[preprocessor.plantuml]
+plantuml-cmd="http://localhost:8080"
