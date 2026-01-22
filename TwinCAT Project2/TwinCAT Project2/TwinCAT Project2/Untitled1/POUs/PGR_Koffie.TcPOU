@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+  <POU Name="PGR_Koffie" Id="{7803fddf-a6de-4cbd-9adc-51c1351a8d4f}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PGR_Koffie
+VAR_EXTERNAL
+    bVraagKoffie  : BOOL;
+    bKoffieGereed : BOOL;
+END_VAR
+
+VAR
+    tKoffie : TON;
+    sStatus : STRING[50];
+	 iState : INT; // 0=Idle, 1=KoffieZetten, 2=Klaar
+	tReis: Ton;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE iState OF
+
+    0: // Idle
+        sStatus := 'Geen koffie opdracht';
+        tKoffie(IN := FALSE);
+        IF bVraagKoffie THEN
+            iState := 1;
+        END_IF
+
+    1: // Koffie zetten
+        sStatus := 'Koffie wordt gezet';
+        tKoffie(IN := TRUE, PT := T#3s);
+        IF tKoffie.Q THEN
+            tKoffie(IN := FALSE);
+            bKoffieGereed := TRUE;
+            bVraagKoffie := FALSE;
+            iState := 2;
+        END_IF
+
+    2: // Klaar
+        sStatus := 'Koffie is klaar';
+
+END_CASE
+]]></ST>
+    </Implementation>
+    <LineIds Name="PGR_Koffie">
+      <LineId Id="54" Count="21" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

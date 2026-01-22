@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+  <POU Name="PRg_Reis" Id="{48da883c-4168-44d7-8f84-1430161abc04}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PRg_Reis
+VAR_EXTERNAL
+    bVraagKoffie  : BOOL;
+    bKoffieGereed : BOOL;
+END_VAR
+
+VAR
+    tReis : TON;
+    sStatus : STRING[50];
+    bAangekomen : BOOL;
+	iState: INT;// 0=Idle, 1=Reizen, 2=Aangekomen, 3=WachtenOpKoffie
+	tKoffie: Ton;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE iState OF
+
+    0: // Idle
+        sStatus := 'Start reis';
+        tReis(IN := FALSE);
+        iState := 1;
+
+    1: // Reizen
+        sStatus := 'Onderweg naar Deventer';
+        tReis(IN := TRUE, PT := T#5s);
+        IF tReis.Q THEN
+            tReis(IN := FALSE);
+            bVraagKoffie := TRUE;
+            iState := 2;
+        END_IF
+
+    2: // Aangekomen
+        sStatus := 'Aangekomen in Deventer';
+        iState := 3;
+
+    3: // Wachten op koffie
+        sStatus := 'Wachten op koffie';
+        IF bKoffieGereed THEN
+            sStatus := 'Koffie ontvangen, verder reizen';
+        END_IF
+
+END_CASE]]></ST>
+    </Implementation>
+    <LineIds Name="PRg_Reis">
+      <LineId Id="56" Count="25" />
+      <LineId Id="55" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

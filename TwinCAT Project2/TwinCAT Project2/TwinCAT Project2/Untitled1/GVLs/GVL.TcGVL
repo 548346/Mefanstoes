@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+  <GVL Name="GVL" Id="{12c41b26-bbf0-4b28-ad51-3901e306bbd0}">
+    <Declaration><![CDATA[
+VAR_GLOBAL
+    bVraagKoffie  : BOOL;
+    bKoffieGereed : BOOL;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+  <POU Name="fBoolToText" Id="{b4e1153d-e370-4b2b-8839-e8f8c6c28b67}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION fBoolToText  : STRING
+VAR_INPUT
+    bValue : BOOL;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bValue THEN
+    fBoolToText := 'TRUE';
+ELSE
+    fBoolToText := 'FALSE';
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="fBoolToText">
+      <LineId Id="16" Count="3" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
